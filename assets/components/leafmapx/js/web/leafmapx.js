@@ -1,10 +1,1 @@
-var LeafMapX = function (config) {
-    config = config || {};
-    LeafMapX.superclass.constructor.call(this, config);
-};
-Ext.extend(LeafMapX, Ext.Component, {
-    page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, view: {}, utils: {}
-});
-Ext.reg('leafmapx', LeafMapX);
-
-LeafMapX = new LeafMapX();
+"use strict";void 0===window.L&&(document.write('<script src="'+LeafMapConfig.jsUrl+'lib/leaflet.js"><\/script>'),check_script_loaded());var LeafMap={init:function(r){var i=L.map(r.target),e=r.startPoint.split(","),t=[e[0].trim(),e[1].trim()],a=r.startZoom,o=L.tileLayer(r.tiles,{attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});i.setView(t,a),o.addTo(i),void 0!==r.beforeLayers&&r.beforeLayers(i),r.layers.forEach(function(o){o.style=o.style||[],fetch(o.file).then(function(e){return e.json()}).then(function(e){var t={};void 0!==r.style&&(t.style=r.style),void 0!==r.onEachFeature&&(t.onEachFeature=r.onEachFeature),void 0!==r.pointToLayer&&(t.pointToLayer=r.pointToLayer),void 0!==o.style&&(t.style=o.style),void 0!==o.onEachFeature&&(t.onEachFeature=o.onEachFeature),void 0!==o.pointToLayer&&(t.pointToLayer=o.pointToLayer);var a=L.geoJSON(e,t);void 0!==r.prepareLayer&&r.prepareLayer(a),void 0!==o.prepareLayer&&o.prepareLayer(a),a.addTo(i)}).catch(function(e){console.log("file: "+o.file+"parsing failed",e)})}),void 0!==r.afterLayers&&r.afterLayers(i)}};function check_script_loaded(){if(void 0!==window.L)for(var e in LeafMapConfig.maps)LeafMap.init(LeafMapConfig.maps[e]);else setTimeout(function(){check_script_loaded()},500)}

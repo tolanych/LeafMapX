@@ -54,13 +54,15 @@ const LeafMap = {
           fnargs.pointToLayer = element.pointToLayer;
         }
 
-        var geojson = L.geoJSON(json, fnargs).addTo(map);
+        var geojson = L.geoJSON(json, fnargs);
         if (typeof(config.prepareLayer) !== 'undefined') {
           config.prepareLayer(geojson);
         }
         if (typeof(element.prepareLayer) !== 'undefined') {
           element.prepareLayer(geojson);
         }
+
+        geojson.addTo(map);
       }).catch(function(ex) {
         console.log('file: ' + element.file + 'parsing failed', ex)
       })
